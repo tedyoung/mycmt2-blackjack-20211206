@@ -45,10 +45,20 @@ public class Hand {
     }
 
     void display() {
-        System.out.println(cards.stream()
-                                .map(ConsoleCard::display)
-                                .collect(Collectors.joining(
-                                        ansi().cursorUp(6).cursorRight(1).toString())));
+        System.out.println(cardsAsString());
+    }
+
+    public String cardsAsString() {
+        return cards().stream()
+                      .map(ConsoleCard::display)
+                      .collect(Collectors.joining(
+                            ansi().cursorUp(6).cursorRight(1).toString()));
+    }
+
+    // QUERY METHOD: Point-in-time "snapshot" of the state of the object.
+    // Don't directly expose fields (instance data).
+    public List<Card> cards() {
+        return List.copyOf(cards);
     }
 
     public void drawFrom(Deck deck) {
