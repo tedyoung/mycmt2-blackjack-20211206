@@ -4,6 +4,7 @@ package com.jitterted.ebp.blackjack.domain;
 // Also an Aggregate Root
 public class Game {
 
+    // COLLABORATOR
     private final Deck deck;
 
     private final Hand dealerHand = new Hand();
@@ -13,6 +14,10 @@ public class Game {
 
     public Game() {
         deck = new Deck();
+    }
+
+    public Game(Deck deck) {
+        this.deck = deck;
     }
 
     public void initialDeal() {
