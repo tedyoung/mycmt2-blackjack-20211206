@@ -5,10 +5,12 @@ import java.util.stream.Collectors;
 import static org.fusesource.jansi.Ansi.ansi;
 
 public class ConsoleHand {
-    static String displayFirstCard(Hand hand) {
+    // TRANSLATE Hand -> String for Console display
+    static String displayFaceUpCard(Hand hand) {
         return ConsoleCard.display(hand.faceUpCard());
     }
 
+    // TRANSLATE Hand -> String for Console display
     public static String cardsAsString(Hand hand) {
         return hand.cards().stream()
                    .map(ConsoleCard::display)
