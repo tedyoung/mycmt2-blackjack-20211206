@@ -23,6 +23,9 @@ public class Game {
     public void initialDeal() {
         dealRoundOfCards();
         dealRoundOfCards();
+        if (playerHand.hasBlackjack()) {
+            playerDone = true;
+        }
     }
 
     private void dealRoundOfCards() {
@@ -36,6 +39,8 @@ public class Game {
             return GameOutcome.PLAYER_BUSTED;
         } else if (dealerHand.isBusted()) {
             return GameOutcome.DEALER_BUSTED;
+        } else if (playerHand.hasBlackjack()) {
+            return GameOutcome.PLAYER_WINS_BLACKJACK;
         } else if (playerHand.beats(dealerHand)) {
             return GameOutcome.PLAYER_BEATS_DEALER;
         } else if (playerHand.pushes(dealerHand)) {
