@@ -83,6 +83,7 @@ public class Game {
     }
 
     public void playerHits() {
+        // only allow if the player is NOT done
         playerHand.drawFrom(deck);
         playerDone = playerHand.isBusted();
     }
