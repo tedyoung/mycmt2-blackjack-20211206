@@ -18,7 +18,7 @@ class BlackjackControllerTest {
 
     @Test
     public void startGameResultsInInitialDealOfCards() throws Exception {
-        Game game = new Game(new Deck());
+        Game game = new Game(StubDeck.playerNotDealtBlackjack());
         BlackjackController blackjackController = new BlackjackController(game);
 
         String redirectPage = blackjackController.startGame();
@@ -116,23 +116,6 @@ class BlackjackControllerTest {
         assertThat(game.isPlayerDone())
                 .isTrue();
     }
-
-    @Test
-    public void standResultsInDealerDrawingCardOnTheirTurn() throws Exception {
-        Deck dealerBeatsPlayerAfterDrawingAdditionalCardDeck =
-                new StubDeck(Rank.TEN,  Rank.QUEEN,
-                             Rank.NINE, Rank.FIVE,
-                                        Rank.SIX);
-        Game game = new Game(dealerBeatsPlayerAfterDrawingAdditionalCardDeck);
-        BlackjackController blackjackController = new BlackjackController(game);
-        blackjackController.startGame();
-
-        blackjackController.standCommand();
-
-        assertThat(game.dealerHand().cards())
-                .hasSize(3);
-    }
-
 
 
 }
