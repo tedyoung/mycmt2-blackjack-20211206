@@ -65,6 +65,9 @@ class BlackjackControllerTest {
 
         assertThat(game.playerHand().cards())
                 .hasSize(3);
+
+        assertThat(game.isPlayerDone())
+                .isFalse();
     }
 
     @Test
@@ -77,6 +80,9 @@ class BlackjackControllerTest {
 
         assertThat(redirectPage)
                 .isEqualTo("redirect:/done");
+
+        assertThat(game.isPlayerDone())
+                .isTrue();
     }
 
     @Test
@@ -94,6 +100,21 @@ class BlackjackControllerTest {
         String outcome = (String) model.getAttribute("outcome");
         assertThat(outcome)
                 .isNotBlank();
+    }
+
+    @Test
+    public void playerStandsResultsInRedirectToDonePageAndPlayerIsDone() throws Exception {
+        Game game = new Game(new Deck());
+        BlackjackController blackjackController = new BlackjackController(game);
+        blackjackController.startGame();
+
+        String redirectPage = blackjackController.standCommand();
+
+        assertThat(redirectPage)
+                .isEqualTo("redirect:/done");
+
+        assertThat(game.isPlayerDone())
+                .isTrue();
     }
 
 }
