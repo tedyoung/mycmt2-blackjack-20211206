@@ -35,6 +35,7 @@ public class Game {
     }
 
     public GameOutcome determineOutcome() {
+        // Need constraint: can't call this method if player is NOT DONE
         if (playerHand.isBusted()) {
             return GameOutcome.PLAYER_BUSTED;
         } else if (dealerHand.isBusted()) {
