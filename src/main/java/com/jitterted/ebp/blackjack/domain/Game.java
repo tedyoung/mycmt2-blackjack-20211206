@@ -1,23 +1,28 @@
 package com.jitterted.ebp.blackjack.domain;
 
+import com.jitterted.ebp.blackjack.domain.port.GameMonitor;
+
 // An Entity (even though it doesn't have an ID)
 // Also an Aggregate Root
 public class Game {
 
     // COLLABORATOR
     private final Deck deck;
+    private final GameMonitor gameMonitor;
 
     private final Hand dealerHand = new Hand();
     private final Hand playerHand = new Hand();
 
     private boolean playerDone;
 
-    public Game() {
-        deck = new Deck();
-    }
-
     public Game(Deck deck) {
         this.deck = deck;
+        this.gameMonitor = game -> {};
+    }
+
+    public Game(Deck deck, GameMonitor gameMonitor) {
+        this.deck = deck;
+        this.gameMonitor = gameMonitor;
     }
 
     public void initialDeal() {
@@ -92,6 +97,7 @@ public class Game {
     public void playerStands() {
         playerDone = true;
         dealerTurn();
+        gameMonitor.roundCompleted(this);
     }
 
     public boolean isPlayerDone() {
