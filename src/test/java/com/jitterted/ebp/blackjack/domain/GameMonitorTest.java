@@ -44,5 +44,15 @@ class GameMonitorTest {
         verify(gameMonitorSpy, never()).roundCompleted(game);
     }
 
+    @Test
+    public void playerDealtBlackjackThenResultsSentToMonitor() throws Exception {
+        GameMonitor gameMonitorSpy = spy(GameMonitor.class);
+        Game game = new Game(StubDeck.playerDealtBlackjack(), gameMonitorSpy);
+
+        game.initialDeal();
+
+        verify(gameMonitorSpy).roundCompleted(game);
+    }
+
 }
 
