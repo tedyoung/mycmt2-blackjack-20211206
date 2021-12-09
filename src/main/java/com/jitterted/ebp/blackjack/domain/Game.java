@@ -92,6 +92,7 @@ public class Game {
         // only allow if the player is NOT done
         playerHand.drawFrom(deck);
         playerDone = playerHand.isBusted();
+        gameMonitor.roundCompleted(this);
     }
 
     public void playerStands() {
